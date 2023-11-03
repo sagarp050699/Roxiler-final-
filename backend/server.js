@@ -11,9 +11,12 @@ const configDB = require("./config/db");
 app.use(cors());
 app.use(express.json());
 
+// routes
 const seedRoute = require("./routes/seedRoute");
+const transactionRoute = require("./routes/transactionRoute");
 
 app.use("/api", seedRoute);
+app.use("/api", transactionRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello Roxiler");
