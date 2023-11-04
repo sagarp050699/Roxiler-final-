@@ -31,6 +31,15 @@ const TransactionsPage = () => {
   return (
     <section>
       <div className="w-[90%]  max-w-5xl mx-auto my-20">
+        {/* search products */}
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Title, Description, or Price"
+            className="input input-bordered input-primary w-full max-w-xs"
+          />
+        </div>
+        {/* end of search products */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 my-20">
           {transactions.map((transaction) => {
             return <TransactionsList {...transaction} key={transaction._id} />;
@@ -39,16 +48,14 @@ const TransactionsPage = () => {
         {/* pagination */}
         <div className="join">
           {[...Array(totalPages).keys()].map((pages) => (
-            <>
-              <Link key={pages} to={`/p/${pages}`}>
-                <button
-                  className={`join-item btn ${
-                    pages == currentPage ? "bg-primary" : ""
-                  }`}>
-                  {pages + 1}
-                </button>
-              </Link>
-            </>
+            <Link key={pages} to={`/p/${pages}`}>
+              <button
+                className={`join-item btn ${
+                  pages == currentPage ? "bg-primary" : ""
+                }`}>
+                {pages + 1}
+              </button>
+            </Link>
           ))}
         </div>
         {/* end of pagination */}
