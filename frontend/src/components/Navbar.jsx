@@ -10,14 +10,10 @@ const Navbar = () => {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link to="/">
-                <a>Transactions</a>
-              </Link>
+              <Link to="/">Transactions</Link>
             </li>
             <li>
-              <Link to="/statistics">
-                <a>Statistics</a>
-              </Link>
+              <Link to="/statistics">Statistics</Link>
             </li>
           </ul>
         </div>
