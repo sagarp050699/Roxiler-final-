@@ -11,7 +11,7 @@ const listTransactions = async (req, res) => {
     let query = {};
 
     if (req.query.q) {
-      // Try to parse the query parameter as a number
+      //  parse the query parameter as a number
       const priceQuery = parseFloat(req.query.q);
 
       if (!isNaN(priceQuery)) {
