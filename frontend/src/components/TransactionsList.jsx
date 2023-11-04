@@ -29,7 +29,7 @@ const TransactionsList = ({
             Date of sale : {dateOfSale.split("T")[0]}
           </p>
         )}
-        <p className=" font-semibold text-xl tracking-wide text-primary">
+        <p className=" font-semibold text-xl tracking-wide text-accent">
           ₹ {price}
         </p>
       </div>

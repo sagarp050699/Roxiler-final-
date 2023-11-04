@@ -9,6 +9,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<TransactionsPage />} />
+        <Route path="/p/:pageNumber" element={<TransactionsPage />} />
         <Route path="/statistics" element={<StatisticsPage />} />
       </Routes>
     </BrowserRouter>
