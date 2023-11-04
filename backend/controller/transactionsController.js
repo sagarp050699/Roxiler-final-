@@ -5,7 +5,12 @@ const ProductModel = require("../model/productsModel");
 // @access  Public
 const listTransactions = async (req, res) => {
   try {
-    const transactions = await ProductModel.find({});
+    const page = req.query.p || 0;
+    const transactionsPerPage = 10;
+
+    const transactions = await ProductModel.find({})
+      .skip(page * transactionsPerPage)
+      .limit(transactionsPerPage);
     res.json(transactions);
   } catch (error) {
     res
