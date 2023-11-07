@@ -10,6 +10,18 @@ const listTransactions = async (req, res) => {
 
     let query = {};
 
+    // Handle month-based search
+    if (req.query.month) {
+      const numericMonth = parseInt(req.query.month, 10);
+
+      if (!isNaN(numericMonth) && numericMonth >= 1 && numericMonth <= 12) {
+        query.$expr = {
+          $eq: [{ $month: "$dateOfSale" }, numericMonth],
+        };
+      }
+    }
+
+    // Handle price query or text-based search
     if (req.query.q) {
       //  parse the query parameter as a number
       const priceQuery = parseFloat(req.query.q);
@@ -28,8 +40,6 @@ const listTransactions = async (req, res) => {
         };
       }
     }
-
-    console.log(query);
 
     const totalTransactions = await ProductModel.countDocuments(query);
     const totalPages = Math.ceil(totalTransactions / transactionsPerPage);
