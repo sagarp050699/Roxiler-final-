@@ -24,6 +24,13 @@ app.get("/", (req, res) => {
   res.send("Hello Roxiler");
 });
 
+// production
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+);
+
 app.listen(process.env.PORT, () => {
   configDB();
   console.log("server up");
