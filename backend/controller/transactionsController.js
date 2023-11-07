@@ -20,6 +20,7 @@ const listTransactions = async (req, res) => {
       } else {
         // If it's not a valid number, only perform text-based searches on other fields
         query = {
+          // Evaluates one or more expressions and returns true if any of the expressions are true else returns false.
           $or: [
             { title: { $regex: req.query.q, $options: "i" } },
             { description: { $regex: req.query.q, $options: "i" } },
@@ -27,6 +28,8 @@ const listTransactions = async (req, res) => {
         };
       }
     }
+
+    console.log(query);
 
     const totalTransactions = await ProductModel.countDocuments(query);
     const totalPages = Math.ceil(totalTransactions / transactionsPerPage);

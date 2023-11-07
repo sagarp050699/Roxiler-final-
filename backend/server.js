@@ -14,9 +14,11 @@ app.use(express.json());
 // routes
 const seedRoute = require("./routes/seedRoute");
 const transactionRoute = require("./routes/transactionRoute");
+const statisticsRoute = require("./routes/statisticsRoute");
 
 app.use("/api", seedRoute);
 app.use("/api", transactionRoute);
+app.use("/api", statisticsRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello Roxiler");
