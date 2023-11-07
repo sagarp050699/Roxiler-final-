@@ -2,37 +2,63 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import TransactionsList from "../components/TransactionsList";
 import { Link, useParams } from "react-router-dom";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const TransactionsPage = () => {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPage] = useState(null);
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const { pageNumber } = useParams();
 
   const fetchTransactions = async () => {
-    let url = "http://localhost:3000/api/transactions";
-    if (pageNumber) {
-      url += `?p=${pageNumber}`;
-    }
-    if (searchInput) {
-      url += `${pageNumber ? "&" : "?"}q=${searchInput}`;
+    try {
+      let url = "http://localhost:3000/api/transactions";
+      if (pageNumber) {
+        url += `?p=${pageNumber}`;
+      }
+      if (searchInput) {
+        // if page number add & else add ?q=searchInput
+        url += `${pageNumber ? "&" : "?"}q=${searchInput}`;
+      }
+      setError(null);
+      setLoading(true);
+
+      const response = await axios.get(url);
+      const data = response.data;
+
+      setTransactions(data.transactions);
+      setCurrentPage(data.page);
+      setTotalPage(data.totalPages);
       setSearchInput("");
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
     }
-    const response = await axios.get(url);
-    const data = response.data;
-    setTransactions(data.transactions);
-    setCurrentPage(data.page);
-    setTotalPage(data.totalPages);
   };
 
   useEffect(() => {
     fetchTransactions();
   }, [pageNumber]);
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   if (transactions.length === 0) {
-    return <h2>Loading...</h2>;
+    return (
+      <section className="max-w-5xl mx-auto min-h-screen grid place-items-center">
+        <h2 className="text-4xl">No results found.</h2>
+      </section>
+    );
   }
 
   return (

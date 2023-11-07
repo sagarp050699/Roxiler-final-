@@ -12,25 +12,24 @@ const StatisticsPage = () => {
     totalNotSoldItems: 0,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (selectedMonth !== "") {
-        try {
-          setError(null);
-          setLoading(true);
-          const response = await axios.get(
-            `http://localhost:3000/api/statistics?month=${selectedMonth}`
-          );
-          setStatistics(response.data);
-          setLoading(false);
-          setError(null);
-        } catch (error) {
-          setLoading(false);
-          setError(error);
-        }
+  const fetchData = async () => {
+    if (selectedMonth !== "") {
+      try {
+        setError(null);
+        setLoading(true);
+        const response = await axios.get(
+          `http://localhost:3000/api/statistics?month=${selectedMonth}`
+        );
+        setStatistics(response.data);
+        setLoading(false);
+        setError(null);
+      } catch (error) {
+        setLoading(false);
+        setError(error);
       }
-    };
-
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, [selectedMonth]);
 
