@@ -18,7 +18,7 @@ const StatisticsPage = () => {
         setError(null);
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:3000/api/statistics?month=${selectedMonth}`
+          `/api/statistics?month=${selectedMonth}`
         );
         setStatistics(response.data);
         setLoading(false);

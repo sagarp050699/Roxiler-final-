@@ -16,7 +16,7 @@ const TransactionsPage = () => {
 
   const fetchTransactions = async () => {
     try {
-      let url = "http://localhost:3000/api/transactions";
+      let url = "/api/transactions";
       if (pageNumber) {
         url += `?p=${pageNumber}`;
       }
