@@ -20,10 +20,6 @@ app.use("/api", seedRoute);
 app.use("/api", transactionRoute);
 app.use("/api", statisticsRoute);
 
-app.get("/", (req, res) => {
-  res.send("Hello Roxiler");
-});
-
 // production
 
 app.use(express.static(path.join(path.resolve(), "/frontend/dist")));
