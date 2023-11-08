@@ -119,7 +119,6 @@ const TransactionsPage = () => {
             </select>
           </div>
         </div>
-        {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 my-20"> */}
         <div className=" my-20">
           <TransactionsList transactions={transactions} />
         </div>
@@ -129,7 +128,7 @@ const TransactionsPage = () => {
             <Link key={pages} to={`/p/${pages}`}>
               <button
                 className={`join-item btn ${
-                  pages == currentPage ? "bg-primary" : ""
+                  pages == currentPage ? "bg-neutral font-semibold" : ""
                 }`}>
                 {pages + 1}
               </button>

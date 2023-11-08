@@ -2,12 +2,14 @@ const ProductsModel = require("../model/productsModel");
 
 async function getStatistics(req, res) {
   try {
-    const selectedMonth = parseInt(req.query.month); //selected month as a numeric value
+    const selectedMonth = parseInt(req.query.month);
 
     const totalSaleAmount = await ProductsModel.aggregate([
       {
         $match: {
+          // Without $expr, you wouldn't be able to directly compare the result of the $month operation with selectedMonth within the $match stage.
           $expr: {
+            // $eq is comparing the result of { $month: "$dateOfSale" } which extracts the month from the "dateOfSale" field) with selectedMonth.
             $eq: [{ $month: "$dateOfSale" }, selectedMonth],
           },
           sold: true,

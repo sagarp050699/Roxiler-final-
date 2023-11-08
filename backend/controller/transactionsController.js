@@ -14,14 +14,17 @@ const listTransactions = async (req, res) => {
     if (req.query.month) {
       const numericMonth = parseInt(req.query.month, 10);
 
+      // check if it is a valid number and is b/w 1 & 12.
       if (!isNaN(numericMonth) && numericMonth >= 1 && numericMonth <= 12) {
+        // $expr allows you to use $month to extract the month for comparison within the $eq operator.
         query.$expr = {
+          // $eq is comparing the result of { $month: "$dateOfSale" } which extracts the month from the "dateOfSale" field) with selectedMonth.
           $eq: [{ $month: "$dateOfSale" }, numericMonth],
         };
       }
     }
 
-    // Handle price query or text-based search
+    // Handle search based on price/title/description
     if (req.query.q) {
       //  parse the query parameter as a number
       const priceQuery = parseFloat(req.query.q);
@@ -32,7 +35,7 @@ const listTransactions = async (req, res) => {
       } else {
         // If it's not a valid number, only perform text-based searches on other fields
         query = {
-          // Evaluates one or more expressions and returns true if any of the expressions are true else returns false.
+          // $or will return documents that meet at least one of the conditions. The query returns true if a document matches any of the conditions and false if it doesn't.
           $or: [
             { title: { $regex: req.query.q, $options: "i" } },
             { description: { $regex: req.query.q, $options: "i" } },

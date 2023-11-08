@@ -6,13 +6,13 @@ const TransactionsList = ({ transactions }) => {
         {/* head */}
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Sold</th>
-            <th>Image</th>
+            <th className="text-base font-bold">ID</th>
+            <th className="text-base font-bold">Title</th>
+            <th className="text-base font-bold">Description</th>
+            <th className="text-base font-bold">Price</th>
+            <th className="text-base font-bold">Category</th>
+            <th className="text-base font-bold">Sold</th>
+            <th className="text-base font-bold">Image</th>
           </tr>
         </thead>
         <tbody>
@@ -45,32 +45,6 @@ const TransactionsList = ({ transactions }) => {
         </tbody>
       </table>
     </div>
-    // <div className="border border-gray-700">
-    //   <div className="relative">
-    //     <img
-    //       src={image}
-    //       alt={title}
-    //       className=" object-cover w-full h-36  px-3 rounded-t-2xl "
-    //     />
-    //     {sold ? (
-    //       <p className="absolute top-0 right-0 bg-secondary text-primary-content rounded-md px-2 py-1">
-    //         sold
-    //       </p>
-    //     ) : null}
-    //   </div>
-    //   <div className="py-5 ps-5">
-    //     <h2 className=" py-2 opacity-75 tracking-wide">{title}</h2>
-    //     <h2 className=" py-2 opacity-75 tracking-wide">{category}</h2>
-    //     {sold && (
-    //       <p className=" font-semibold text-xl tracking-wide">
-    //         Date of sale : {dateOfSale.split("T")[0]}
-    //       </p>
-    //     )}
-    //     <p className=" font-semibold text-xl tracking-wide text-accent">
-    //       ₹ {price}
-    //     </p>
-    //   </div>
-    // </div>
   );
 };
 export default TransactionsList;
