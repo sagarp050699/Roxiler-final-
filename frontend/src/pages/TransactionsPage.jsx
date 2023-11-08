@@ -12,7 +12,29 @@ const TransactionsPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchInput, setSearchInput] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("3");
   const { pageNumber } = useParams();
+
+  // array of month options
+  const monthOptions = [
+    { value: "", label: "All" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
+  ];
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+  };
 
   const fetchTransactions = async () => {
     try {
@@ -21,8 +43,10 @@ const TransactionsPage = () => {
         url += `?p=${pageNumber}`;
       }
       if (searchInput) {
-        // if page number add & else add ?q=searchInput
         url += `${pageNumber ? "&" : "?"}q=${searchInput}`;
+      }
+      if (selectedMonth) {
+        url += `${pageNumber || searchInput ? "&" : "?"}month=${selectedMonth}`;
       }
       setError(null);
       setLoading(true);
@@ -43,7 +67,7 @@ const TransactionsPage = () => {
 
   useEffect(() => {
     fetchTransactions();
-  }, [pageNumber]);
+  }, [pageNumber, selectedMonth]);
 
   if (loading) {
     return <Loader />;
@@ -64,20 +88,37 @@ const TransactionsPage = () => {
   return (
     <section>
       <div className="w-[90%]  max-w-5xl mx-auto my-20">
-        {/* search products */}
-        <div className="flex gap-4 flex-wrap">
-          <input
-            type="text"
-            placeholder="Enter Title, Description, or Price"
-            className="input input-bordered input-primary w-full max-w-xs"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <button className="btn btn-primary" onClick={fetchTransactions}>
-            Search
-          </button>
+        <div className="flex flex-wrap justify-between ">
+          {/* search products */}
+          <div className="flex gap-4 items-center w-[40%]">
+            <input
+              type="text"
+              placeholder="Enter Title, Description, or Price"
+              className="input input-bordered input-primary w-full"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={fetchTransactions}>
+              Search
+            </button>
+          </div>
+          {/* select month */}
+          <div className="flex w-1/3 items-center">
+            <label className="w-full ">Select a month:</label>
+            <select
+              value={selectedMonth}
+              onChange={handleMonthChange}
+              className="select select-primary w-full">
+              {monthOptions.map((option) => (
+                <option key={option?.value} value={option?.value}>
+                  {option?.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        {/* end of search products */}
         {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 my-20"> */}
         <div className=" my-20">
           <TransactionsList transactions={transactions} />

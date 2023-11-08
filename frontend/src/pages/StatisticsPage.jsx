@@ -66,14 +66,19 @@ const StatisticsPage = () => {
     <section>
       <div className="w-[90%]  max-w-5xl mx-auto py-20">
         <div className="mx-auto  w-96">
-          <label>Select a month: </label>
-          <select value={selectedMonth} onChange={handleMonthChange}>
-            {monthOptions.map((option) => (
-              <option key={option?.value} value={option?.value}>
-                {option?.label}
-              </option>
-            ))}
-          </select>
+          <div className="flex mb-10 items-center">
+            <label className="w-full">Select a month: </label>
+            <select
+              value={selectedMonth}
+              onChange={handleMonthChange}
+              className="select select-primary w-full max-w-xs">
+              {monthOptions.map((option) => (
+                <option key={option?.value} value={option?.value}>
+                  {option?.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <p>Total Sale Amount: {statistics?.totalSaleAmount}</p>
             <p>Total Sold Items: {statistics?.totalSoldItems}</p>
