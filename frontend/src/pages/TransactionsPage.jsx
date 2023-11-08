@@ -78,10 +78,9 @@ const TransactionsPage = () => {
           </button>
         </div>
         {/* end of search products */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 my-20">
-          {transactions.map((transaction) => {
-            return <TransactionsList {...transaction} key={transaction._id} />;
-          })}
+        {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 my-20"> */}
+        <div className=" my-20">
+          <TransactionsList transactions={transactions} />
         </div>
         {/* pagination */}
         <div className="join">
