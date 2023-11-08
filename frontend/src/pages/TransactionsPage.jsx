@@ -77,6 +77,7 @@ const TransactionsPage = () => {
     return <Error />;
   }
 
+  // if transactions array is empty
   if (transactions.length === 0) {
     return (
       <section className="max-w-5xl mx-auto min-h-screen grid place-items-center">
@@ -88,13 +89,13 @@ const TransactionsPage = () => {
   return (
     <section>
       <div className="w-[90%]  max-w-5xl mx-auto my-20">
-        <div className="flex flex-wrap justify-between ">
+        <div className="flex flex-wrap justify-between pe-20 sm:pe-0 sm:justify-between ">
           {/* search products */}
-          <div className="flex gap-4 items-center w-[40%]">
+          <div className="flex flex-wrap gap-4 items-center mb-8 sm:mb-0 sm:w-[40%]">
             <input
               type="text"
               placeholder="Enter Title, Description, or Price"
-              className="input input-bordered input-primary w-full"
+              className="input input-bordered input-primary w-[65%]"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
@@ -105,12 +106,12 @@ const TransactionsPage = () => {
             </button>
           </div>
           {/* select month */}
-          <div className="flex w-1/3 items-center">
-            <label className="w-full ">Select a month:</label>
+          <div className="flex gap-2 justify-between sm:w-1/4 items-center flex-wrap">
+            <label className=" ">Select a month:</label>
             <select
               value={selectedMonth}
               onChange={handleMonthChange}
-              className="select select-primary w-full">
+              className="select select-primary ">
               {monthOptions.map((option) => (
                 <option key={option?.value} value={option?.value}>
                   {option?.label}
